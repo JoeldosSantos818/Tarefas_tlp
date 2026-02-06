@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Transportes | CTM</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background: #003049;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.nav-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+}
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Hero */
+.hero {
+    background: #f77f00;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+.hero-content h1 {
+    font-size: 2.5rem;
+}
+.hero-content p {
+    margin: 1rem 0;
+}
+.btn {
+    background: #003049;
+    color: #fff;
+    padding: 0.8rem 1.4rem;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* About */
+.section-about {
+    padding: 2rem;
+    text-align: center;
+}
+.section-about p {
+    max-width: 700px;
+    margin: auto;
+}
+
+/* Benefits */
+.section-benefits {
+    padding: 2rem;
+}
+.benefits-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 1rem;
+}
+.card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+}
+
+/* Clients */
+.section-clients {
+    background: #eae2b7;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Testimonials */
+.section-testimonials {
+    padding: 2rem;
+}
+.testimonials-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.testimony {
+    background: #ffb4a2;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #003049;
+    color: #ffffff;
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-col h3,
+.footer-col h4 {
+    margin-bottom: 1rem;
+    color: #fcbf49;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-col ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.footer-col ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 2rem;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+/* Responsivity */
+@media(max-width:768px) {
+    .nav-toggle {
+        display: block;
+    }
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-logo">CTM Transportes</div>
+        <div class="nav-toggle" id="nav-toggle">&#9776;</div>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#beneficios">Vantagens</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#testemunhos">Testemunhos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Software de Gestão de Transportes</h1>
+            <p>Otimize toda a sua operação de transporte de forma intuitiva e profissional.</p>
+            <a href="#sobre" class="btn">Saber Mais</a>
+        </div>
+    </header>
+
+    <!-- Sobre -->
+    <section id="sobre" class="section-about">
+        <h2>O que é o CTM</h2>
+        <p>CTM – Cloud Transportation Management é uma plataforma web para gerir serviços de transporte com eficiência,
+            reduzindo reclamações e melhorando a rastreabilidade e atendimento ao cliente.</p>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="section-benefits">
+        <h2>Principais Vantagens</h2>
+        <div class="benefits-grid">
+            <div class="card">
+                <h3>Menos Reclamações</h3>
+                <p>Automatiza tarefas e garante rastreabilidade total das entregas.</p>
+            </div>
+            <div class="card">
+                <h3>Resposta Rápida</h3>
+                <p>Informações em tempo real melhoram o atendimento ao cliente.</p>
+            </div>
+            <div class="card">
+                <h3>Exatidão na Faturação</h3>
+                <p>Evita erros e esquecimentos graças a fluxos automatizados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clientes / Integração -->
+    <section id="clientes" class="section-clients">
+        <h2>Integração com Clientes e Parceiros</h2>
+        <p>O CTM integra os seus sistemas com plataformas de clientes, oferecendo visibilidade total das operações.</p>
+    </section>
+
+    <!-- Testemunhos -->
+    <section id="testemunhos" class="section-testimonials">
+        <h2>O que dizem os nossos Clientes</h2>
+        <div class="testimonials-grid">
+            <div class="testimony">
+                <p>“O CTM tem-nos permitido melhorar as nossas operações…”</p>
+                <span>– Rita Cadima</span>
+            </div>
+            <div class="testimony">
+                <p>“Abrahamção intuitiva e eficiente no dia a dia…”</p>
+                <span>– João Amaral</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-col">
+                <h3>CTM Transportes</h3>
+                <p>
+                    Plataforma profissional de gestão de transportes,
+                    otimizada para empresas modernas e orientadas a resultados.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#beneficios">Vantagens</a></li>
+                    <li><a href="#clientes">Clientes</a></li>
+                    <li><a href="#testemunhos">Testemunhos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contactos</h4>
+                <p>Email: joeldossantos818@gmail.com</p>
+                <p>Telefone: 946 40 97 70 </p>
+                <p>Portugal</p>
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', () => {
+                const menu = document.getElementById('nav-menu');
+                if (menu.style.display === "flex") {
+                    menu.style.display = "none";
+                } else {
+                    menu.style.display = "flex";
+                }
+            });
+    </script>
+</body>
+
+</html>

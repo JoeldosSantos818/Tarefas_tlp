@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo de CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Barra de navegação fixa */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: #FFEB3B;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 90px;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background-color: #FFEB3B;
+            color: #B71C1C;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link.active:hover {
+            background-color: #FFD600;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Conteúdo principal */
+        .hero-section {
+            background: white;
+            border-radius: 15px;
+            padding: 60px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #D32F2F, #FFEB3B, #D32F2F);
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            color: #D32F2F;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            color: #B71C1C;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero-text {
+            color: #555;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Seção de conteúdos */
+        .content-section {
+            margin-top: 60px;
+        }
+
+        .section-title {
+            color: #B71C1C;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #FFEB3B;
+            display: inline-block;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #D32F2F, #FFEB3B);
+        }
+
+        .content-icon {
+            display: inline-block;
+            background: #D32F2F;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .content-title {
+            color: #B71C1C;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .content-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Exemplos de código */
+        .code-example {
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-comment {
+            color: #75715e;
+        }
+
+        .code-selector {
+            color: #a6e22e;
+        }
+
+        .code-property {
+            color: #66d9ef;
+        }
+
+        .code-value {
+            color: #e6db74;
+        }
+
+        /* Seção de recursos */
+        .resources-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #D32F2F;
+        }
+
+        .resource-title {
+            color: #B71C1C;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-link {
+                padding: 10px 15px;
+                min-width: 80px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegação fixa -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <i class="fab fa-css3-alt"></i>
+                <span>Guia CSS</span>
+            </div>
+            <ul class="nav-links">
+
+                <li class="nav-item">
+                    <a href="2trimestre.html" class="nav-link active">II Trimestre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#introducao" class="nav-link active">Introdução</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#seletores" class="nav-link">Seletores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#propriedades" class="nav-link">Propriedades</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#layout" class="nav-link">Layout</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#responsivo" class="nav-link">Responsivo</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#recursos" class="nav-link">Recursos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="main-container">
+        <section id="introducao" class="hero-section">
+            <div class="hero-icon">
+                <i class="fab fa-css3-alt"></i>
+            </div>
+            <h1 class="hero-title">CSS - Cascading Style Sheets</h1>
+            <p class="hero-text">
+                CSS é uma linguagem de estilo utilizada para descrever a apresentação de documentos HTML.
+                Com o CSS você controla cores, fontes, espaçamentos, layouts e muito mais!
+            </p>
+            <div
+                style="background-color: #FFF8E1; padding: 20px; border-radius: 10px; max-width: 800px; margin: 0 auto;">
+                <h3 style="color: #B71C1C; margin-bottom: 10px;">🎨 O Poder do CSS</h3>
+                <p style="color: #555;">CSS separa o conteúdo (HTML) da apresentação (estilo), permitindo que você crie
+                    sites visualmente incríveis com menos código e maior flexibilidade.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Seletores -->
+        <section id="seletores" class="content-section">
+            <h2 class="section-title">Seletores CSS</h2>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                Seletores são padrões usados para selecionar os elementos HTML que você deseja estilizar.
+            </p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="content-title">Seletor por Tag</h3>
+                    <p class="content-description">
+                        Seleciona todos os elementos de um determinado tipo.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">p</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">color</span>: <span class="code-value">blue</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3 class="content-title">Seletor por ID</h3>
+                    <p class="content-description">
+                        Seleciona um elemento específico com um id único.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">#header</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">background-color</span>: <span
+                            class="code-value">#333</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <h3 class="content-title">Seletor por Classe</h3>
+                    <p class="content-description">
+                        Seleciona todos os elementos com uma classe específica.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.destaque</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">font-weight</span>: <span
+                            class="code-value">bold</span>;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Propriedades -->
+        <section id="propriedades" class="content-section">
+            <h2 class="section-title">Propriedades Principais</h2>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                As propriedades CSS definem como os elementos selecionados serão estilizados.
+            </p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="content-title">Cores e Fundos</h3>
+                    <p class="content-description">
+                        Controle cores do texto, fundos e gradientes.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.elemento</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">color</span>: <span
+                            class="code-value">#ffffff</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">background-color</span>: <span
+                            class="code-value">#D32F2F</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <h3 class="content-title">Tipografia</h3>
+                    <p class="content-description">
+                        Defina fontes, tamanhos, pesos e espaçamentos.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">h1</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">font-family</span>: <span class="code-value">'Arial',
+                            sans-serif</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">font-size</span>: <span
+                            class="code-value">2.5rem</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-border-all"></i>
+                    </div>
+                    <h3 class="content-title">Box Model</h3>
+                    <p class="content-description">
+                        Controle margin, padding, border e box-sizing.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.caixa</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">margin</span>: <span class="code-value">20px</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">padding</span>: <span
+                            class="code-value">15px</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">border</span>: <span class="code-value">2px solid
+                            #333</span>;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Layout -->
+        <section id="layout" class="content-section">
+            <h2 class="section-title">Técnicas de Layout</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3 class="content-title">Flexbox</h3>
+                    <p class="content-description">
+                        Modelo unidimensional para criar layouts flexíveis e responsivos.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.container</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">display</span>: <span
+                            class="code-value">flex</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">justify-content</span>: <span
+                            class="code-value">center</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">align-items</span>: <span
+                            class="code-value">center</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h3 class="content-title">CSS Grid</h3>
+                    <p class="content-description">
+                        Sistema bidimensional para criar layouts complexos.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.grid-container</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">display</span>: <span
+                            class="code-value">grid</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">grid-template-columns</span>: <span
+                            class="code-value">repeat(3, 1fr)</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">gap</span>: <span class="code-value">20px</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="content-title">Position</h3>
+                    <p class="content-description">
+                        Controle de posicionamento: relative, absolute, fixed e sticky.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.menu-fixo</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">position</span>: <span
+                            class="code-value">fixed</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">top</span>: <span class="code-value">0</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">100%</span>;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Responsiva -->
+        <section id="responsivo" class="content-section">
+            <h2 class="section-title">Design Responsivo</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="content-title">Media Queries</h3>
+                    <p class="content-description">
+                        Adapte o layout para diferentes tamanhos de tela.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-comment">/* Para telas menores que 768px */</span><br>
+                        <span class="code-selector">@media</span> (<span class="code-property">max-width</span>: <span
+                            class="code-value">768px</span>) {<br>
+                        &nbsp;&nbsp;<span class="code-selector">.coluna</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">width</span>: <span
+                            class="code-value">100%</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <h3 class="content-title">Unidades Flexíveis</h3>
+                    <p class="content-description">
+                        Use unidades relativas como %, vw, vh, rem e em.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-selector">.container</span> {<br>
+                        &nbsp;&nbsp;<span class="code-property">width</span>: <span class="code-value">90%</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">max-width</span>: <span
+                            class="code-value">1200px</span>;<br>
+                        &nbsp;&nbsp;<span class="code-property">margin</span>: <span class="code-value">0
+                            auto</span>;<br>
+                        }
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="content-title">Viewport</h3>
+                    <p class="content-description">
+                        Meta tag essencial para sites responsivos.
+                    </p>
+                    <div class="code-example">
+                        <span class="code-comment"></span><br>
+                        &lt;<span class="code-selector">meta</span> <span class="code-property">name</span>=<span
+                            class="code-value">"viewport"</span><br>
+                        &nbsp;&nbsp;<span class="code-property">content</span>=<span
+                            class="code-value">"width=device-width, initial-scale=1.0"</span>&gt;
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="recursos" class="resources-section">
+            <h2 class="section-title">Recursos Úteis</h2>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                Ferramentas e referências para aprimorar seu conhecimento em CSS.
+            </p>
+
+            <div class="resources-grid">
+                <div class="resource-item">
+                    <h3 class="resource-title">MDN Web Docs</h3>
+                    <p>Documentação completa e atualizada sobre CSS.</p>
+                </div>
+
+                <div class="resource-item">
+                    <h3 class="resource-title">CSS Tricks</h3>
+                    <p>Tutoriais, dicas e truques para desenvolvedores CSS.</p>
+                </div>
+
+                <div class="resource-item">
+                    <h3 class="resource-title">Can I Use</h3>
+                    <p>Verifique a compatibilidade de recursos CSS nos navegadores.</p>
+                </div>
+
+                <div class="resource-item">
+                    <h3 class="resource-title">CSS Gradient</h3>
+                    <p>Gerador de gradientes CSS com interface visual.</p>
+                </div>
+
+                <div class="resource-item">
+                    <h3 class="resource-title">Flexbox Froggy</h3>
+                    <p>Jogo interativo para aprender Flexbox de forma divertida.</p>
+                </div>
+
+                <div class="resource-item">
+                    <h3 class="resource-title">Grid Garden</h3>
+                    <p>Jogo educativo para dominar CSS Grid Layout.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        //      // Adicionar classe ativa ao link de navegação quando clicado
+        //      document.querySelectorAll('.nav-link').forEach(link => {
+        //          link.addEventListener('click', function (e) {
+        //              // Remover classe ativa de todos os links
+        //              document.querySelectorAll('.nav-link').forEach(item => {
+        //                  item.classList.remove('active');
+        //            //  });
+
+        //              // Adicionar classe ativa ao link clicado
+        //              this.classList.add('acti//ve');
+
+        //              // Rolagem suave para a seção
+        //              if (this.getAttribute('href') !== '#') {
+        //                  e.preventDefault();
+        //                  const targetId = this.getAttribute('href');
+        //                  const targetElement = document.querySelector(targe//tId);
+
+        //                  window.scrollTo({
+        //                      top: targetElement.offsetTop - 80,
+        //                      behavior: 'smooth'
+        //                  });
+        //              }
+        //          });
+        //    //  });
+
+        //      // Manter o link ativo com base na rolagem
+        //      window.addEventListener('scroll', function () {
+        //          const sections = document.querySelectorAll('section');
+        //          const navLinks = document.querySelectorAll('.nav-li//nk');
+
+        //          let current //= '';
+
+        //          sections.forEach(section => {
+        //              const sectionTop = section.offsetTop;
+        //              const sectionHeight = section.clientHe//ight;
+
+        //              if (scrollY >= (sectionTop - 150)) {
+        //                  current = section.getAttribute('id');
+        //              }
+        //        //  });
+
+        //          navLinks.forEach(link => {
+        //              link.classList.remove('active');
+        //              if (link.getAttribute('href') === `#${current}`) {
+        //                  link.classList.add('active');
+        //              } else if (!current && link.getAttribute('href') === '#introducao') {
+        //                  link.classList.add('active');
+        //              }
+        //          });
+        //      });
+    </script>
+</body>
+
+</html>
