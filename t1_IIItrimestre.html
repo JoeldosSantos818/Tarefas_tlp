@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Notas - Escola Excellence</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+           * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-top: 76px;
+        }
+
+        /* Navbar Fixa */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .navbar-brand i {
+            color: #007bff;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: #007bff !important;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            border: none;
+            color: white;
+        }
+
+        .bg-azul-escuro {
+            background-color: #007bff;
+        }
+
+        .bg-laranja {
+            background-color: #ff6f00;
+        }
+
+        /* Table Styles */
+        .table {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: #343a40;
+            color: white;
+            border: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f4f8;
+        }
+
+        /* Badge Colors */
+        .badge-aprovado {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .badge-reprovado {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .badge-recurso {
+            background-color: #ff6f00;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background: #343a40;
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 60px 0;
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 66px;
+            }
+            
+            .table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Fixa -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="3trimestre.html"><i class="fas fa-tasks"></i><span>3º Trimestre</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="t1_IIItrimestre.html">
+                            <i class="bi bi-pencil-square me-1"></i> T1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="t2_IIItrimestre.html">
+                            <i class="bi bi-table me-1"></i> T2
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold" style="color: #007bff;">
+                        <i class="bi bi-clipboard-check"></i>
+                    </h1>
+                    <h2 class="fw-bold text-primary">Registro de Notas</h2>
+                    <p class="text-muted">Preencha o formulário abaixo para registrar as notas do aluno</p>
+                </div>
+
+                <!-- Form Card -->
+                <div class="card shadow rounded">
+                    <div class="card-header py-3">
+                        <h4 class="mb-0">
+                            <i class="bi bi-person-plus me-2"></i>
+                            Dados do Aluno
+                        </h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="formNotas" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <!-- Nome -->
+                                <div class="col-md-8">
+                                    <label class="form-label">
+                                        <i class="bi bi-person text-primary me-1"></i>
+                                        Nome Completo
+                                    </label>
+                                    <input type="text" class="form-control" id="nome" required 
+                                           placeholder="Digite o nome do aluno">
+                                    <div class="invalid-feedback">
+                                        Por favor, insira o nome do aluno.
+                                    </div>
+                                </div>
+
+                                <!-- Número -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-hash text-primary me-1"></i>
+                                        Número
+                                    </label>
+                                    <input type="number" class="form-control" id="numero" required 
+                                           placeholder="Nº do aluno">
+                                    <div class="invalid-feedback">
+                                        Obrigatório.
+                                    </div>
+                                </div>
+                                <!-- Turma -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-people text-primary me-1"></i>
+                                        Turma
+                                    </label>
+                                    <input type="text" class="form-control" id="turma" required 
+                                           placeholder="Digite o nome do aluno">
+                                    <div class="invalid-feedback">
+                                        Por favor, insira o nome do aluno.
+                                    </div>
+                                </div>
+                                <!-- Turno -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-clock text-primary me-1"></i>
+                                        Turno
+                                    </label>
+                                    <select class="form-select" id="turno" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="Manhã">Manhã</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noite">Noite</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Selecione o turno.
+                                    </div>
+                                </div>
+                                <!-- Classe -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-building text-primary me-1"></i>
+                                        Classe
+                                    </label>
+                                    <input type="text" class="form-control" id="classe" required 
+                                           placeholder="Ex: 10ª Classe">
+                                    <div class="invalid-feedback">
+                                        Obrigatório.
+                                    </div>
+                                </div>
+
+                                <!-- Sala -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-door-open text-primary me-1"></i>
+                                        Sala
+                                    </label>
+                                    <input type="text" class="form-control" id="sala" required 
+                                           placeholder="Nº da sala">
+                                    <div class="invalid-feedback">
+                                        Obrigatório.
+                                    </div>
+                                </div>
+
+                                <!-- Disciplina -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-person text-primary me-1"></i>
+                                        Disciplina
+                                    </label>
+                                    <input type="text" class="form-control" id="disciplina" required 
+                                           placeholder="Digite o nome do aluno">
+                                    <div class="invalid-feedback">
+                                        Por favor, insira o nome do aluno.
+                                    </div>
+                                </div>
+
+                                <!-- Notas Section -->
+                                <div class="col-12 mt-4">
+                                    <h5 class="fw-bold mb-3 text-primary">
+                                        <i class="bi bi-pencil-square me-2"></i>
+                                        Notas das Provas
+                                    </h5>
+                                </div>
+
+                                <!-- 1ª Prova -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-1-circle text-primary me-1"></i>
+                                        1ª Prova
+                                    </label>
+                                    <input type="number" class="form-control" id="nota1" required 
+                                           min="0" max="20" step="0.1" placeholder="0-20">
+                                    <div class="invalid-feedback">
+                                        Nota entre 0 e 20.
+                                    </div>
+                                </div>
+
+                                <!-- 2ª Prova -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-2-circle text-primary me-1"></i>
+                                        2ª Prova
+                                    </label>
+                                    <input type="number" class="form-control" id="nota2" required 
+                                           min="0" max="20" step="0.1" placeholder="0-20">
+                                    <div class="invalid-feedback">
+                                        Nota entre 0 e 20.
+                                    </div>
+                                </div>
+
+                                <!-- 3ª Prova -->
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-3-circle text-primary me-1"></i>
+                                        3ª Prova
+                                    </label>
+                                    <input type="number" class="form-control" id="nota3" required 
+                                           min="0" max="20" step="0.1" placeholder="0-20">
+                                    <div class="invalid-feedback">
+                                        Nota entre 0 e 20.
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="col-12 mt-4">
+                                    <div class="d-flex gap-2 justify-content-end">
+                                        <button type="button" class="btn btn-outline-secondary px-4" 
+                                                onclick="limparFormulario()">
+                                            <i class="bi bi-eraser me-2"></i>Limpar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary px-4">
+                                            <i class="bi bi-save me-2"></i>Salvar Notas
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Preview Card -->
+                <div class="card shadow rounded mt-4" id="previewCard" style="display: none;">
+                    <div class="card-header bg-success py-3">
+                        <h5 class="mb-0">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Registro Salvo com Sucesso!
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Aluno:</strong> <span id="previewNome"></span></p>
+                                <p><strong>Turma:</strong> <span id="previewTurma"></span></p>
+                                <p><strong>Turno:</strong> <span id="previewTurno"></span></p>
+                                <p><strong>Classe:</strong> <span id="previewClasse"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Sala:</strong> <span id="previewSala"></span></p>
+                                <p><strong>Disciplina:</strong> <span id="previewDisciplina"></span></p>
+                                <p><strong>Média:</strong> <span id="previewMedia" class="fw-bold fs-5"></span></p>
+                                <p><strong>Classificação:</strong> <span id="previewClassificacao" class="badge fs-6"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Função para calcular a média
+        function calcularMedia(nota1, nota2, nota3) {
+            return (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3;
+        }
+
+        // Função para classificar o aluno
+        function classificarAluno(media) {
+            if (media >= 10) {
+                return 'Aprovado';
+            } else if (media >= 7) {
+                return 'Recurso';
+            } else {
+                return 'Reprovado';
+            }
+        }
+
+        // Função para gerar cor baseada na classificação
+        function getCorClassificacao(classificacao) {
+            switch(classificacao) {
+                case 'Aprovado':
+                    return 'badge-aprovado';
+                case 'Reprovado':
+                    return 'badge-reprovado';
+                case 'Recurso':
+                    return 'badge-recurso';
+                default:
+                    return 'bg-secondary';
+            }
+        }
+
+        // Função para salvar dados no localStorage
+        function salvarDados(dados) {
+            let alunos = JSON.parse(localStorage.getItem('alunos')) || [];
+            alunos.push(dados);
+            localStorage.setItem('alunos', JSON.stringify(alunos));
+        }
+
+        // Função para limpar formulário
+        function limparFormulario() {
+            document.getElementById('formNotas').reset();
+            document.getElementById('formNotas').classList.remove('was-validated');
+            document.getElementById('previewCard').style.display = 'none';
+        }
+
+        // Função para mostrar preview
+        function mostrarPreview(dados) {
+            document.getElementById('previewNome').textContent = dados.nome;
+            document.getElementById('previewTurma').textContent = dados.turma;
+            document.getElementById('previewTurno').textContent = dados.turno;
+            document.getElementById('previewClasse').textContent = dados.classe;
+            document.getElementById('previewSala').textContent = dados.sala;
+            document.getElementById('previewDisciplina').textContent = dados.disciplina;
+            document.getElementById('previewMedia').textContent = dados.media.toFixed(2) + ' valores';
+            
+            const classificacaoSpan = document.getElementById('previewClassificacao');
+            classificacaoSpan.textContent = dados.classificacao;
+            classificacaoSpan.className = 'badge fs-6 ' + getCorClassificacao(dados.classificacao);
+            
+            document.getElementById('previewCard').style.display = 'block';
+            document.getElementById('previewCard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Event Listener para o formulário
+        document.getElementById('formNotas').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                this.classList.add('was-validated');
+                return;
+            }
+            
+            const nota1 = parseFloat(document.getElementById('nota1').value);
+            const nota2 = parseFloat(document.getElementById('nota2').value);
+            const nota3 = parseFloat(document.getElementById('nota3').value);
+            
+            if (nota1 < 0 || nota1 > 20 || nota2 < 0 || nota2 > 20 || nota3 < 0 || nota3 > 20) {
+                alert('As notas devem estar entre 0 e 20 valores!');
+                return;
+            }
+            
+            const media = calcularMedia(nota1, nota2, nota3);
+            const classificacao = classificarAluno(media);
+            
+            const dadosAluno = {
+                id: Date.now(),
+                nome: document.getElementById('nome').value.trim(),
+                numero: document.getElementById('numero').value,
+                turma: document.getElementById('turma').value,
+                turno: document.getElementById('turno').value,
+                classe: document.getElementById('classe').value.trim(),
+                sala: document.getElementById('sala').value.trim(),
+                disciplina: document.getElementById('disciplina').value,
+                nota1: nota1,
+                nota2: nota2,
+                nota3: nota3,
+                media: media,
+                classificacao: classificacao,
+                data: new Date().toLocaleString('pt-BR')
+            };
+            
+            salvarDados(dadosAluno);
+            mostrarPreview(dadosAluno);
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Salvo!';
+            submitBtn.classList.add('btn-success');
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalHTML;
+                submitBtn.classList.remove('btn-success');
+                limparFormulario();
+            }, 2000);
+        });
+
+        // Validação em tempo real das notas
+        ['nota1', 'nota2', 'nota3'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                if (value < 0) this.value = 0;
+                if (value > 20) this.value = 20;
+            });
+        });
+    </script>
+</body>
+</html>
