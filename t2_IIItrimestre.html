@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Escola Excellence</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+           * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-top: 76px;
+        }
+
+        /* Navbar Fixa */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .navbar-brand i {
+            color: #007bff;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: #007bff !important;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            border: none;
+            color: white;
+        }
+
+        .bg-azul-escuro {
+            background-color: #007bff;
+        }
+
+        .bg-laranja {
+            background-color: #ff6f00;
+        }
+
+        /* Table Styles */
+        .table {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background: #343a40;
+            color: white;
+            border: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f4f8;
+        }
+
+        /* Badge Colors */
+        .badge-aprovado {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .badge-reprovado {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .badge-recurso {
+            background-color: #ff6f00;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background: #343a40;
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 60px 0;
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 66px;
+            }
+            
+            .table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Fixa -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="3trimestre.html"><i class="fas fa-tasks"></i><span>3º Trimestre</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="t1_IIItrimestre.html">
+                            <i class="bi bi-pencil-square me-1"></i> T1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="t2_IIItrimestre.html">
+                            <i class="bi bi-table me-1"></i> T2
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold" style="color: #007bff;">
+                        <i class="bi bi-trophy"></i>
+                    </h1>
+                    <h2 class="fw-bold text-primary">Resultados dos Alunos</h2>
+                    <p class="text-muted">Lista completa de todos os alunos cadastrados</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4" id="statsCards">
+                    <div class="col-md-4 mb-3">
+                        <div class="card stats-card bg-azul-escuro text-white shadow">
+                            <div class="card-body text-center py-4">
+                                <i class="bi bi-check-circle display-4 mb-3"></i>
+                                <h3 id="totalAprovados" class="fw-bold">0</h3>
+                                <p class="mb-0 fs-5">Aprovados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card stats-card bg-danger text-white shadow">
+                            <div class="card-body text-center py-4">
+                                <i class="bi bi-x-circle display-4 mb-3"></i>
+                                <h3 id="totalReprovados" class="fw-bold">0</h3>
+                                <p class="mb-0 fs-5">Reprovados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card stats-card bg-laranja text-white shadow">
+                            <div class="card-body text-center py-4">
+                                <i class="bi bi-exclamation-circle display-4 mb-3"></i>
+                                <h3 id="totalRecurso" class="fw-bold">0</h3>
+                                <p class="mb-0 fs-5">Em Recurso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="card shadow rounded">
+                    <div class="card-header" style="background: #343a40; color: white;" class="py-3">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <h4 class="mb-0">
+                                <i class="bi bi-list-ul me-2"></i>
+                                Lista Completa de Alunos
+                            </h4>
+                            <div class="d-flex gap-2 mt-2 mt-md-0">
+                                <button class="btn btn-light btn-sm" onclick="exportarDados()">
+                                    <i class="bi bi-download me-1"></i> Exportar
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="limparTodosDados()">
+                                    <i class="bi bi-trash me-1"></i> Limpar Tudo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Search and Filter -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="text" id="searchInput" class="form-control" 
+                                           placeholder="Pesquisar por nome, turma, disciplina..." 
+                                           onkeyup="atualizarTabela()">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="filterClassificacao" class="form-select" 
+                                        onchange="atualizarTabela()">
+                                    <option value="">Todas Classificações</option>
+                                    <option value="Aprovado">Aprovados</option>
+                                    <option value="Reprovado">Reprovados</option>
+                                    <option value="Recurso">Em Recurso</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary w-100" onclick="atualizarTabela()">
+                                    <i class="bi bi-arrow-repeat me-1"></i> Atualizar Lista
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Total de registros -->
+                        <div class="mb-3">
+                            <span class="text-muted">
+                                <i class="bi bi-people me-1"></i>
+                                Total de alunos: <strong id="totalRegistros">0</strong>
+                            </span>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table id="tabelaResultados" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><i class="bi bi-hash"></i> Nº</th>
+                                        <th><i class="bi bi-person"></i> Nome</th>
+                                        <th><i class="bi bi-people"></i> Turma</th>
+                                        <th><i class="bi bi-clock"></i> Turno</th>
+                                        <th><i class="bi bi-building"></i> Classe</th>
+                                        <th><i class="bi bi-door-open"></i> Sala</th>
+                                        <th><i class="bi bi-book"></i> Disciplina</th>
+                                        <th><i class="bi bi-1-circle"></i> 1ª Prova</th>
+                                        <th><i class="bi bi-2-circle"></i> 2ª Prova</th>
+                                        <th><i class="bi bi-3-circle"></i> 3ª Prova</th>
+                                        <th><i class="bi bi-calculator"></i> Média</th>
+                                        <th><i class="bi bi-trophy"></i> Resultado</th>
+                                        <th><i class="bi bi-calendar"></i> Data</th>
+                                        <th><i class="bi bi-gear"></i> Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Dados serão inseridos via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="emptyState" class="empty-state text-center" style="display: none;">
+                            <i class="bi bi-inbox display-1 mb-3"></i>
+                            <h4 class="text-muted mt-3">Nenhum aluno cadastrado</h4>
+                            <p class="text-muted">Comece registrando notas na página inicial</p>
+                            <a href="index.html" class="btn btn-primary btn-lg">
+                                <i class="bi bi-plus-circle me-2"></i> Registrar Primeiro Aluno
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Função para carregar TODOS os dados do localStorage
+        function carregarTodosDados() {
+            const dados = localStorage.getItem('alunos');
+            return dados ? JSON.parse(dados) : [];
+        }
+
+        // Função para formatar a classificação com cor
+        function formatarClassificacao(classificacao) {
+            let badgeClass = '';
+            switch(classificacao) {
+                case 'Aprovado':
+                    badgeClass = 'badge-aprovado';
+                    break;
+                case 'Reprovado':
+                    badgeClass = 'badge-reprovado';
+                    break;
+                case 'Recurso':
+                    badgeClass = 'badge-recurso';
+                    break;
+                default:
+                    badgeClass = 'bg-secondary';
+            }
+            return `<span class="badge ${badgeClass}">${classificacao}</span>`;
+        }
+
+        // Função para colorir as notas
+        function formatarNota(nota) {
+            let color = nota >= 10 ? '#007bff' : '#dc3545';
+            let fontWeight = nota >= 10 ? 'bold' : 'normal';
+            return `<span style="color: ${color}; font-weight: ${fontWeight};">${nota.toFixed(1)}</span>`;
+        }
+
+        // Função principal para atualizar a tabela com TODOS os alunos
+        function atualizarTabela() {
+            const todosAlunos = carregarTodosDados();
+            const tbody = document.getElementById('tableBody');
+            const emptyState = document.getElementById('emptyState');
+            const tableResponsive = document.querySelector('.table-responsive');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filterClassificacao = document.getElementById('filterClassificacao').value;
+            
+            // Filtrar dados baseado na pesquisa
+            let alunosFiltrados = todosAlunos;
+            
+            if (searchTerm) {
+                alunosFiltrados = alunosFiltrados.filter(aluno => 
+                    (aluno.nome && aluno.nome.toLowerCase().includes(searchTerm)) ||
+                    (aluno.turma && aluno.turma.toLowerCase().includes(searchTerm)) ||
+                    (aluno.disciplina && aluno.disciplina.toLowerCase().includes(searchTerm)) ||
+                    (aluno.numero && aluno.numero.toString().includes(searchTerm))
+                );
+            }
+            
+            if (filterClassificacao) {
+                alunosFiltrados = alunosFiltrados.filter(aluno => 
+                    aluno.classificacao === filterClassificacao
+                );
+            }
+            
+            // Ordenar por nome (padrão)
+            alunosFiltrados.sort((a, b) => {
+                const nomeA = (a.nome || '').toLowerCase();
+                const nomeB = (b.nome || '').toLowerCase();
+                return nomeA.localeCompare(nomeB);
+            });
+            
+            // Atualizar estatísticas com TODOS os alunos
+            atualizarEstatisticas(todosAlunos);
+            
+            // Atualizar contador total
+            document.getElementById('totalRegistros').textContent = alunosFiltrados.length;
+            
+            // Limpar tabela
+            tbody.innerHTML = '';
+            
+            if (alunosFiltrados.length === 0) {
+                emptyState.style.display = 'block';
+                if (tableResponsive) tableResponsive.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                if (tableResponsive) tableResponsive.style.display = 'block';
+                
+                // Mostrar TODOS os alunos
+                alunosFiltrados.forEach((aluno, index) => {
+                    const row = document.createElement('tr');
+                    row.style.animation = `fadeIn 0.3s ease ${index * 0.05}s both`;
+                    
+                    row.innerHTML = `
+                        <td><strong>${aluno.numero || '-'}</strong></td>
+                        <td><strong>${aluno.nome || '-'}</strong></td>
+                        <td><span class="badge bg-info">${aluno.turma || '-'}</span></td>
+                        <td>${aluno.turno || '-'}</td>
+                        <td>${aluno.classe || '-'}</td>
+                        <td>${aluno.sala || '-'}</td>
+                        <td><i class="bi bi-bookmark-check text-primary me-1"></i>${aluno.disciplina || '-'}</td>
+                        <td>${aluno.nota1 ? formatarNota(aluno.nota1) : '-'}</td>
+                        <td>${aluno.nota2 ? formatarNota(aluno.nota2) : '-'}</td>
+                        <td>${aluno.nota3 ? formatarNota(aluno.nota3) : '-'}</td>
+                        <td><strong>${aluno.media ? aluno.media.toFixed(2) : '-'}</strong></td>
+                        <td>${aluno.classificacao ? formatarClassificacao(aluno.classificacao) : '-'}</td>
+                        <td><small>${aluno.data || '-'}</small></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger" 
+                                    onclick="deletarRegistro(${aluno.id})" 
+                                    title="Deletar registro">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+        }
+
+        // Função para atualizar estatísticas
+        function atualizarEstatisticas(alunos) {
+            const totalAprovados = alunos.filter(a => a.classificacao === 'Aprovado').length;
+            const totalReprovados = alunos.filter(a => a.classificacao === 'Reprovado').length;
+            const totalRecurso = alunos.filter(a => a.classificacao === 'Recurso').length;
+            const totalGeral = alunos.length;
+            
+            document.getElementById('totalAprovados').textContent = totalAprovados;
+            document.getElementById('totalReprovados').textContent = totalReprovados;
+            document.getElementById('totalRecurso').textContent = totalRecurso;
+            
+            // Animação nos números
+            ['totalAprovados', 'totalReprovados', 'totalRecurso'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        el.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            });
+        }
+
+        // Função para deletar registro
+        function deletarRegistro(id) {
+            if (confirm('Tem certeza que deseja deletar este registro permanentemente?')) {
+                let alunos = carregarTodosDados();
+                alunos = alunos.filter(aluno => aluno.id !== id);
+                localStorage.setItem('alunos', JSON.stringify(alunos));
+                atualizarTabela();
+                
+                // Mostrar toast de confirmação
+                mostrarToast('Registro deletado com sucesso!', 'danger');
+            }
+        }
+
+        // Função para limpar todos os dados
+        function limparTodosDados() {
+            if (confirm('ATENÇÃO: Isso vai deletar TODOS os registros permanentemente. Deseja continuar?')) {
+                localStorage.removeItem('alunos');
+                atualizarTabela();
+                mostrarToast('Todos os registros foram removidos!', 'warning');
+            }
+        }
+
+        // Função para mostrar toast
+        function mostrarToast(mensagem, tipo = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${tipo} alert-dismissible fade show position-fixed`;
+            toast.style.cssText = `
+                top: 100px;
+                right: 20px;
+                z-index: 2000;
+                animation: slideInRight 0.5s ease;
+            `;
+            toast.innerHTML = `
+                <i class="bi bi-${tipo === 'success' ? 'check' : tipo === 'danger' ? 'exclamation' : 'info'}-circle me-2"></i>
+                ${mensagem}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Função para exportar dados
+        function exportarDados() {
+            const alunos = carregarTodosDados();
+            
+            if (alunos.length === 0) {
+                alert('Não há dados para exportar!');
+                return;
+            }
+            
+            // Criar CSV
+            let csv = 'Nº,Nome,Turma,Turno,Classe,Sala,Disciplina,1ª Prova,2ª Prova,3ª Prova,Média,Classificação,Data\n';
+            
+            alunos.forEach(aluno => {
+                csv += `${aluno.numero},${aluno.nome},${aluno.turma},${aluno.turno},${aluno.classe},${aluno.sala},${aluno.disciplina},${aluno.nota1},${aluno.nota2},${aluno.nota3},${aluno.media.toFixed(2)},${aluno.classificacao},${aluno.data}\n`;
+            });
+            
+            // Download do arquivo
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `resultados_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            mostrarToast('Dados exportados com sucesso!', 'success');
+        }
+
+        // Adicionar animações CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Carregar tabela ao iniciar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            atualizarTabela();
+            console.log('Tabela carregada com sucesso! Total de alunos:', carregarTodosDados().length);
+        });
+
+        // Atualizar tabela quando houver mudanças no localStorage
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'alunos') {
+                atualizarTabela();
+            }
+        });
+
+        // Atualizar automaticamente a cada 30 segundos
+        setInterval(atualizarTabela, 30000);
+    </script>
+</body>
+</html>
