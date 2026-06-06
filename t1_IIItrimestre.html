@@ -517,6 +517,11 @@
                 if (value < 0) this.value = 0;
                 if (value > 20) this.value = 20;
             });
+            // Salva lista atualizada
+        localStorage.setItem("alunos", JSON.stringify(alunos));
+
+        window.location.href = "t2_IIItrimestre.html";
+
         });
     </script>
 </body>
